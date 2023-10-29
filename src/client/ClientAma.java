@@ -23,7 +23,20 @@ public class ClientAma {
 			System.out.println("Connecté au serveur " + s.getInetAddress() + ":"+ s.getPort());
 			
 			String line;
-		// menu et choix du service
+			
+			boolean continuer = true;
+
+			while (continuer) {
+			    line = sin.readLine();
+			    if (line != null) {
+			        System.out.println(line.replaceAll("##", "\n"));
+			        sout.println(clavier.readLine());
+			    } else {
+			        continuer = false; // Si le serveur n'a rien envoyé, la boucle s'arrête
+			    }
+			}
+			
+		/*// menu et choix du service
 			line = sin.readLine();
 			System.out.println(line.replaceAll("##", "\n"));
 		// saisie/envoie du choix
@@ -34,7 +47,7 @@ public class ClientAma {
 		// saisie clavier/envoie au service de la réponse
 			sout.println(clavier.readLine());
 		// réception/affichage de la réponse
-			System.out.println(sin.readLine());
+			System.out.println(sin.readLine());*/
 				
 			
 		}

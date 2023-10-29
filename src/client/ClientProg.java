@@ -23,7 +23,7 @@ public class ClientProg {
 			System.out.println("Connecté au serveur " + s.getInetAddress() + ":"+ s.getPort());
 			
 			String line;
-			/*boolean continuer = true;
+			boolean continuer = true;
 
 			while (continuer) {
 			    line = sin.readLine();
@@ -33,10 +33,10 @@ public class ClientProg {
 			    } else {
 			        continuer = false; // Si le serveur n'a rien envoyé, la boucle s'arrête
 			    }
-			}*/
+			}
 
 			
-		// menu et choix du service
+		/*// menu et choix du service
 			line = sin.readLine();
 			System.out.println(line.replaceAll("##", "\n"));
 		// saisie/envoie du choix
@@ -48,7 +48,7 @@ public class ClientProg {
 			sout.println(clavier.readLine());
 		// réception/affichage de la réponse
 			System.out.println(sin.readLine());
-				
+				*/
 			
 		}
 		catch (IOException e) { System.err.println("Fin de la connexion"); }

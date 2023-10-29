@@ -10,6 +10,7 @@ import java.net.Socket;
 import autre.Programmeur;
 
 public class ServiceProg implements Runnable{
+	
 	private Socket client;
 	
 	ServiceProg(Socket socket) {
@@ -19,7 +20,7 @@ public class ServiceProg implements Runnable{
 	public void run() {
 		try {BufferedReader in = new BufferedReader (new InputStreamReader(client.getInputStream ( )));
 			PrintWriter out = new PrintWriter (client.getOutputStream ( ), true);
-			/*out.println("Bonjour, quel est votre login ?");
+			out.println("Bonjour, quel est votre login ?");
 			String login = in.readLine();
 			out.println("Quel est le mot de passe ?");
 			String mdp = in.readLine();
@@ -35,9 +36,9 @@ public class ServiceProg implements Runnable{
 			else {
 				String ftp = utilisateur.getFtp();
 			}
-			*/
 			
-			out.println(ServiceRegistry.toStringue()+"##Que voulez vous faire ? ##1. Fournir un nouveau service ##2. Mettre à jour un service ##3. Déclarer un changement d’adresse de son serveur ftp\r\n");
+			
+			out.println(ServiceRegistry.toStringue()+"##Que voulez vous faire ? ##1. Fournir un nouveau service ##2. Mettre à jour un service ##3. Déclarer un changement d’adresse de son serveur ftp");
 			int choix = Integer.parseInt(in.readLine());
 			
 			/*switch(choix) {
