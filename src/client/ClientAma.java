@@ -8,13 +8,13 @@ import java.net.Socket;
 
 public class ClientAma {
 
-	private final static int PORT_SERVICE = 3000;
+	private final static int PORT_AMA = 3000;
 	private final static String HOST = "localhost"; 
 
 	public static void main(String[] args) {
 		Socket s = null;		
 		try {
-			s = new Socket(HOST, PORT_SERVICE);
+			s = new Socket(HOST, PORT_AMA);
 	
 			BufferedReader sin = new BufferedReader (new InputStreamReader(s.getInputStream ( )));
 			PrintWriter sout = new PrintWriter (s.getOutputStream ( ), true);

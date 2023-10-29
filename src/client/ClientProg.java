@@ -8,13 +8,13 @@ import java.net.Socket;
 
 public class ClientProg {
 
-	private final static int PORT_SERVICE = 4000;
+	private final static int PORT_PROG = 4000;
 	private final static String HOST = "localhost"; 
 
 	public static void main(String[] args) {
 		Socket s = null;		
 		try {
-			s = new Socket(HOST, PORT_SERVICE);
+			s = new Socket(HOST, PORT_PROG);
 	
 			BufferedReader sin = new BufferedReader (new InputStreamReader(s.getInputStream ( )));
 			PrintWriter sout = new PrintWriter (s.getOutputStream ( ), true);
@@ -23,6 +23,19 @@ public class ClientProg {
 			System.out.println("Connecté au serveur " + s.getInetAddress() + ":"+ s.getPort());
 			
 			String line;
+			/*boolean continuer = true;
+
+			while (continuer) {
+			    line = sin.readLine();
+			    if (line != null) {
+			        System.out.println(line.replaceAll("##", "\n"));
+			        sout.println(clavier.readLine());
+			    } else {
+			        continuer = false; // Si le serveur n'a rien envoyé, la boucle s'arrête
+			    }
+			}*/
+
+			
 		// menu et choix du service
 			line = sin.readLine();
 			System.out.println(line.replaceAll("##", "\n"));
