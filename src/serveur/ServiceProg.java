@@ -6,12 +6,16 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
+import java.net.URL;
+import java.net.URLClassLoader;
 
 import autre.Programmeur;
 
 public class ServiceProg implements Runnable{
 	
 	private Socket client;
+	URLClassLoader urlcl = null;
+	String ftp;
 	
 	ServiceProg(Socket socket) {
 		client = socket;
@@ -30,20 +34,28 @@ public class ServiceProg implements Runnable{
 			if(utilisateur == null) {
 				Programmeur newUtilisateur = new Programmeur(login, mdp);
 				out.println("Votre compte a été créé avec succès, quel est l'adresse de votre serveur FTP ?");
-				String ftp = in.readLine();
+				ftp = in.readLine();
 				newUtilisateur.setFtp(ftp);
 			}
 			else {
-				String ftp = utilisateur.getFtp();
+				ftp = utilisateur.getFtp();
 			}
 			
 			
 			out.println(ServiceRegistry.toStringue()+"##Que voulez vous faire ? ##1. Fournir un nouveau service ##2. Mettre à jour un service ##3. Déclarer un changement d’adresse de son serveur ftp");
 			int choix = Integer.parseInt(in.readLine());
 			
-			/*switch(choix) {
+			switch(choix) {
 				case 1:
 					out.println("Quel est le nom du service à installer ?");
+					try {
+						String classeName = in.readLine();
+						String fileNameURL = ftp;
+						urlcl = URLClassLoader.newInstance(new URL[] {new URL(fileNameURL)});
+						ServiceRegistry.addService(urlcl.loadClass(classeName).asSubclass(Service.class));
+					} catch (Exception e) {
+						System.out.println(e);
+					}
 					break;
 				case 2:
 					out.println("Quel service voulez vous mettre à jour ? ?");
@@ -53,7 +65,7 @@ public class ServiceProg implements Runnable{
 					break;
 				default:
 					break;
-			}*/
+			}
 			
 			Class<? extends Service> classe = ServiceRegistry.getServiceClass(choix);
 			Service service = classe.getConstructor(java.net.Socket.class).newInstance(this.client);
