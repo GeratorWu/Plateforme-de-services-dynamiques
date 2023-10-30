@@ -36,20 +36,6 @@ public class ClientAma {
 			    }
 			}
 			
-		/*// menu et choix du service
-			line = sin.readLine();
-			System.out.println(line.replaceAll("##", "\n"));
-		// saisie/envoie du choix
-			sout.println(clavier.readLine());
-			
-		// réception/affichage de la question
-			System.out.println(sin.readLine());
-		// saisie clavier/envoie au service de la réponse
-			sout.println(clavier.readLine());
-		// réception/affichage de la réponse
-			System.out.println(sin.readLine());*/
-				
-			
 		}
 		catch (IOException e) { System.err.println("Fin de la connexion"); }
 		// Refermer dans tous les cas la socket

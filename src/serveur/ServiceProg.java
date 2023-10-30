@@ -45,12 +45,12 @@ public class ServiceProg implements Runnable{
 			out.println(ServiceRegistry.toStringue()+"##Que voulez vous faire ? ##1. Fournir un nouveau service ##2. Mettre à jour un service ##3. Déclarer un changement d’adresse de son serveur ftp");
 			int choix = Integer.parseInt(in.readLine());
 			
+			String fileNameURL = ftp;
 			switch(choix) {
 				case 1:
 					out.println("Quel est le nom du service à installer ?");
 					try {
 						String classeName = in.readLine();
-						String fileNameURL = ftp;
 						urlcl = URLClassLoader.newInstance(new URL[] {new URL(fileNameURL)});
 						ServiceRegistry.addService(urlcl.loadClass(classeName).asSubclass(Service.class));
 					} catch (Exception e) {
@@ -59,22 +59,24 @@ public class ServiceProg implements Runnable{
 					break;
 				case 2:
 					out.println("Quel service voulez vous mettre à jour ? ?");
+					try {
+						String classeName = in.readLine();
+						urlcl = URLClassLoader.newInstance(new URL[] {new URL(fileNameURL)});
+						ServiceRegistry.replaceService(urlcl.loadClass(classeName).asSubclass(Service.class));
+					} catch (Exception e) {
+						System.out.println(e);
+					}
 					break;
 				case 3:
-					out.println("Quel est la nouvelle adresse ftp ?");
+					out.println("Voici votre adresse ftp actuelle :" + ftp + ". Quel est la nouvelle adresse ftp ?");
+					utilisateur.setFtp(in.readLine());
 					break;
 				default:
 					break;
 			}
 			
-			Class<? extends Service> classe = ServiceRegistry.getServiceClass(choix);
-			Service service = classe.getConstructor(java.net.Socket.class).newInstance(this.client);
-			service.run();
-			// instancier le service numéro "choix" en lui passant la socket "client"
-			// invoquer run() pour cette instance ou la lancer dans un thread à part 
-				
 			}
-		catch (IOException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+		catch (IOException | IllegalArgumentException | SecurityException e) {
 			//Fin du service
 		}
 

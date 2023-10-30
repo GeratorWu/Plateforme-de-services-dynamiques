@@ -18,7 +18,7 @@ public class ServiceInversion implements Service {
 		try {BufferedReader in = new BufferedReader (new InputStreamReader(client.getInputStream ( )));
 			PrintWriter out = new PrintWriter (client.getOutputStream ( ), true);
 
-			out.println("Tapez un texte à inverser");
+			out.println("Tapez un texte à inaaaaaaaaverser");
 		
 			String line = in.readLine();		
 	

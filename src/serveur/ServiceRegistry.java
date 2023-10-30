@@ -26,6 +26,16 @@ public class ServiceRegistry {
 		servicesClasses.add(class1);
 	}
 	
+	public static void replaceService(Class<? extends Service> service) throws ValidationException{
+		validation(service);
+		if(servicesClasses.contains(service)) {
+			servicesClasses.remove(service);
+			servicesClasses.add(service);
+		}else {
+			throw new ValidationException("La classe de service n'est pas dans la liste");
+		}
+	}
+	
 	// une méthode de validation renvoie void et lève une exception si non validation
 	// surtout pas de retour boolean !
 	private static void validation(Class<? extends Service> classe) throws ValidationException {
