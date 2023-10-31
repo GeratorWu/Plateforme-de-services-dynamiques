@@ -10,6 +10,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 import autre.Programmeur;
+import examples.Service;
 
 public class ServiceProg implements Runnable{
 	

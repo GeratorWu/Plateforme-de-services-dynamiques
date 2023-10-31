@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import examples.Service;
+
 public class ServiceRegistry {
 	// cette classe est un registre de services
 	// partagée en concurrence par les clients et les "ajouteurs" de services,

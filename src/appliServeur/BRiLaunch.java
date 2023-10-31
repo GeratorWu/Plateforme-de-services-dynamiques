@@ -4,9 +4,9 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Scanner;
 
+import examples.Service;
 import serveur.ServeurBRi;
 import serveur.ServeurProg;
-import serveur.Service;
 import serveur.ServiceRegistry;
 
 public class BRiLaunch {

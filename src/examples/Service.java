@@ -1,4 +1,4 @@
-package serveur;
+package examples;
 
 // rien à ajouter ici
 
