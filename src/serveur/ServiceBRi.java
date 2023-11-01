@@ -5,7 +5,7 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.net.*;
 
-import examples.Service;
+import service.Service;
 
 
 class ServiceBRi implements Runnable {

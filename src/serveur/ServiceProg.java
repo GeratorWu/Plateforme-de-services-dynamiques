@@ -10,7 +10,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 import autre.Programmeur;
-import examples.Service;
+import service.Service;
 
 public class ServiceProg implements Runnable{
 	
@@ -59,7 +59,7 @@ public class ServiceProg implements Runnable{
 					}
 					break;
 				case 2:
-					out.println("Quel service voulez vous mettre à jour ? ?");
+					out.println("Quel est le nom du service que voulez vous mettre à jour ?");
 					try {
 						String classeName = in.readLine();
 						urlcl = URLClassLoader.newInstance(new URL[] {new URL(fileNameURL)});

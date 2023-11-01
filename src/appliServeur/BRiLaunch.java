@@ -4,10 +4,10 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Scanner;
 
-import examples.Service;
 import serveur.ServeurBRi;
 import serveur.ServeurProg;
 import serveur.ServiceRegistry;
+import service.Service;
 
 public class BRiLaunch {
 	private final static int PORT_AMA = 3000;
@@ -18,11 +18,8 @@ public class BRiLaunch {
 
 		URLClassLoader urlcl = null;
 		
-		System.out.println("Bienvenue dans votre gestionnaire dynamique d'activité BRi");
-		System.out.println("Pour ajouter une activité, celle-ci doit être présente sur votre serveur ftp");
-		System.out.println("A tout instant, en tapant le nom de la classe, vous pouvez l'intégrer");
-		System.out.println("Les clients se connectent au serveur 3000 pour lancer une activité");
-		
+		System.out.println("Bonjour !");
+
 		new Thread(new ServeurBRi(PORT_AMA)).start();
 		new Thread(new ServeurProg(PORT_PROG)).start();
 		

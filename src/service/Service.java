@@ -1,4 +1,4 @@
-package examples;
+package service;
 
 // rien à ajouter ici
 

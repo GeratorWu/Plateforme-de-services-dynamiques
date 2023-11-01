@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import examples.Service;
+import service.Service;
 
 public class ServiceRegistry {
 	// cette classe est un registre de services
@@ -19,23 +19,37 @@ public class ServiceRegistry {
 	}
 	private static List<Class<?extends Service>> servicesClasses;
 
-// ajoute une classe de service après contrôle de la norme BLTi
+
 	public static void addService(Class<? extends Service> class1) throws ValidationException {
-		// vérifier la conformité par introspection
-		// si non conforme --> exception avec message clair
-		// si conforme, ajout au vector
-		validation(class1);
-		servicesClasses.add(class1);
+	    validation(class1);
+	    
+	    boolean existe = false;
+	    for (Class<? extends Service> existingClass : servicesClasses) {
+	        if (existingClass.getName().equals(class1.getName())) {
+	            existe = true;
+	            break;
+	        }
+	    }
+	    
+	    if (!existe) {
+	        servicesClasses.add(class1);
+	    } else {
+	        throw new ValidationException("La classe de service existe déjà");
+	    }
 	}
+
 	
 	public static void replaceService(Class<? extends Service> service) throws ValidationException{
 		validation(service);
-		if(servicesClasses.contains(service)) {
-			servicesClasses.remove(service);
-			servicesClasses.add(service);
-		}else {
-			throw new ValidationException("La classe de service n'est pas dans la liste");
-		}
+
+	    for (Class<? extends Service> existingClass : servicesClasses) {
+	        if (existingClass.getName().equals(service.getName())) {
+	        	servicesClasses.remove(existingClass);
+				servicesClasses.add(service);
+	        }else {
+				throw new ValidationException("La classe de service n'est pas dans la liste");
+	        }
+	    }
 	}
 	
 	// une méthode de validation renvoie void et lève une exception si non validation
