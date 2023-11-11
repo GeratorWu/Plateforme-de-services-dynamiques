@@ -38,8 +38,12 @@ public class ServiceProg implements Runnable{
 				ftp = in.readLine();
 				newUtilisateur.setFtp(ftp);
 			}
-			else {
+			else if (utilisateur.verifProg(mdp)){
 				ftp = utilisateur.getFtp();
+			}
+			else {
+				out.println("Mot de passe incorrect");
+				client.close();
 			}
 			
 			

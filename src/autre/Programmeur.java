@@ -45,4 +45,8 @@ public class Programmeur {
 		this.certifie = true;
 	}
 	
+	public boolean verifProg(String mdp) {
+		return (this.mdp.equals(mdp));
+	}
+	
 }

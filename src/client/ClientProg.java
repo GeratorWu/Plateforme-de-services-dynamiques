@@ -31,7 +31,7 @@ public class ClientProg {
 			        System.out.println(line.replaceAll("##", "\n"));
 			        sout.println(clavier.readLine());
 			    } else {
-			        continuer = false; // Si le serveur n'a rien envoyé, la boucle s'arrête
+			        continuer = false;
 			    }
 			}
 			
