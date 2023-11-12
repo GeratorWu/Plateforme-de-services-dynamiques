@@ -29,6 +29,13 @@ public class ServiceRegistry {
 	        }
 	    }
 	    
+	    for (Class<? extends Service> existingClass : servicesStop) {
+	        if (existingClass.getName().equals(class1.getName())) {
+	            existe = true;
+	            break;
+	        }
+	    }
+	    
 	    if (!existe) {
 	        servicesClasses.add(class1);
 	    } else {
