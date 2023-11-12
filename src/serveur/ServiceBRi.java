@@ -25,9 +25,6 @@ class ServiceBRi implements Runnable {
 			Class<? extends Service> classe = ServiceRegistry.getServiceClass(choix);
 			Service service = classe.getConstructor(java.net.Socket.class).newInstance(this.client);
 			service.run();
-			// instancier le service numéro "choix" en lui passant la socket "client"
-			// invoquer run() pour cette instance ou la lancer dans un thread à part 
-				
 			}
 		catch (IOException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
 			//Fin du service
