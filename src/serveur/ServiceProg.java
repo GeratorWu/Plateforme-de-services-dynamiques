@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -47,7 +46,7 @@ public class ServiceProg implements Runnable{
 			}
 			
 			
-			out.println(ServiceRegistry.toStringue()+"##Que voulez vous faire ? ##1. Fournir un nouveau service ##2. Mettre à jour un service ##3. Déclarer un changement d’adresse de son serveur ftp");
+			out.println(ServiceRegistry.toStringue()+"##Que voulez vous faire ? ##1. Fournir un nouveau service ##2. Mettre à jour un service ##3. Déclarer un changement d’adresse de son serveur ftp ##4. Arrêter un service ##5. Démarrer un service ##6. Désinstaller un service");
 			int choix = Integer.parseInt(in.readLine());
 			
 			String fileNameURL = ftp;
@@ -75,6 +74,21 @@ public class ServiceProg implements Runnable{
 				case 3:
 					out.println("Voici votre adresse ftp actuelle :" + ftp + ". Quel est la nouvelle adresse ftp ?");
 					utilisateur.setFtp(in.readLine());
+					break;
+				case 4:
+					out.println("Quel est le numéro du service que vous voulez arrêter ?");
+					int stop = Integer.parseInt(in.readLine());
+					ServiceRegistry.stopService(stop);
+					break;
+				case 5:
+					out.println(ServiceRegistry.toStringueStop() + "Quel est le numéro du service que vous voulez démarrer ?");
+					int start = Integer.parseInt(in.readLine());
+					ServiceRegistry.startService(start);
+					break;
+				case 6:
+					out.println("Quel est le numéro du service que vous voulez désinstaller ?");
+					int desinstaller = Integer.parseInt(in.readLine());
+					ServiceRegistry.removeService(desinstaller);
 					break;
 				default:
 					break;

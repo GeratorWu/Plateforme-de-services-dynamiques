@@ -5,20 +5,18 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import service.Service;
 
 public class ServiceRegistry {
-	// cette classe est un registre de services
-	// partagée en concurrence par les clients et les "ajouteurs" de services,
-	// un Vector pour cette gestion est pratique
+	
+	private static List<Class<?extends Service>> servicesClasses;
+	private static List<Class<?extends Service>> servicesStop;
 
 	static {
 		servicesClasses = new ArrayList<Class<? extends Service>>();
+		servicesStop =new ArrayList<Class<? extends Service>>();
 	}
-	private static List<Class<?extends Service>> servicesClasses;
-
 
 	public static void addService(Class<? extends Service> class1) throws ValidationException {
 	    validation(class1);
@@ -36,6 +34,22 @@ public class ServiceRegistry {
 	    } else {
 	        throw new ValidationException("La classe de service existe déjà");
 	    }
+	}
+	
+	public static void removeService(int i){	    
+	    servicesClasses.remove(i-1);
+	}
+	
+	public static void startService(int i){	    
+		Class<? extends Service> servicetmp = servicesStop.get(i-1);
+	    servicesStop.remove(i-1);
+	    servicesClasses.add(servicetmp);
+	}
+	
+	public static void stopService(int i){	    
+		Class<? extends Service> servicetmp = servicesClasses.get(i-1);
+	    servicesClasses.remove(i-1);
+	    servicesStop.add(servicetmp);
 	}
 
 	
@@ -74,7 +88,6 @@ public class ServiceRegistry {
 	
 	}
 	
-// renvoie la classe de service (numService -1)	
 	public static Class<? extends Service> getServiceClass(int numService) {
 		return servicesClasses.get(numService - 1);
 	}
@@ -94,6 +107,24 @@ public class ServiceRegistry {
 					i++;
 				} catch (Exception e) {
 					e.printStackTrace(); // normalement déjà testé par validation()
+				}
+			}
+		}
+		return result;
+	}
+	
+	public static String toStringueStop() {
+		String result = "Activités arrêtées présentes :##";
+		int i = 1;
+		synchronized (servicesClasses) { 
+			for (Class<? extends Service> s : servicesStop) {
+				try {
+					Method toStringue = s.getMethod("toStringue");
+					String string = (String) toStringue.invoke(s);
+					result = result + i + " " + string+"##";
+					i++;
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}
